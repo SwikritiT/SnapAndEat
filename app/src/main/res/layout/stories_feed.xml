@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/stories_pic"
+        android:layout_width="65dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/propic2"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/darker_gray"
+        android:layout_height="65dp" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_below="@id/stories_pic"
+        android:id="@+id/stories_name"
+        android:layout_marginLeft="15dp"
+        android:layout_width="65dp"
+        android:layout_height="18dp"
+        android:text="Your story"/>
+</RelativeLayout>
