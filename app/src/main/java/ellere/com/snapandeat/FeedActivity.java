@@ -1,4 +1,4 @@
-package ellere.com.snapandeat;
+package ellere.com.snapandeat.activity;
 
 /**
  * Created by swikriti on 3/15/2020.
@@ -12,6 +12,12 @@ package ellere.com.snapandeat;
         import android.support.v7.widget.RecyclerView;
 
         import java.util.ArrayList;
+
+        import ellere.com.snapandeat.R;
+        import ellere.com.snapandeat.adapter.RecyclerViewAdapterFeed;
+        import ellere.com.snapandeat.adapter.RecyclerViewAdapterStories;
+        import ellere.com.snapandeat.model.FeedModel;
+        import ellere.com.snapandeat.model.StoriesModel;
 
 public class FeedActivity extends AppCompatActivity {
 
