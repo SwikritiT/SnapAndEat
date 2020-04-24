@@ -1,4 +1,4 @@
-package ellere.com.snapandeat;
+package ellere.com.snapandeat.model;
 
 /**
  * Created by swikriti on 3/15/2020.
