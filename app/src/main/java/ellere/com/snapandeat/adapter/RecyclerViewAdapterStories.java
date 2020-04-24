@@ -1,4 +1,4 @@
-package ellere.com.snapandeat;
+package ellere.com.snapandeat.adapter;
 
 /**
  * Created by swikriti on 3/15/2020.
@@ -14,6 +14,8 @@ package ellere.com.snapandeat;
         import android.view.ViewGroup;
         import android.widget.TextView;
 
+        import ellere.com.snapandeat.R;
+        import ellere.com.snapandeat.model.StoriesModel;
         import com.bumptech.glide.Glide;
         import com.bumptech.glide.RequestManager;
 
