@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".FeedActivity"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
     <FrameLayout
@@ -13,63 +14,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        />
 
-    <RelativeLayout
-        android:id="@+id/feed_rellay"
+
+
+
+
+    <!--</FrameLayout>-->
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/rel_lay1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recy_stories"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <View
-                android:id="@+id/line_1"
-                android:layout_below="@id/recy_stories"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:alpha=".2"
-                android:background="@android:color/black"
-                android:layout_marginTop="10dp"/>
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_below="@id/rel_lay1"
-            android:id="@+id/recy_feed"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
-
-
-    </RelativeLayout>
-
-
-
-
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:itemBackground="@color/colorPrimary"
-            android:foreground="?attr/selectableItemBackground"
-            app:itemIconTint="@android:color/black"
-            app:itemTextColor="@android:color/black"
-            app:menu="@menu/bottom_navigation_menu"/>
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:itemBackground="@color/colorPrimary"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemIconTint="@android:color/black"
+        app:itemTextColor="@android:color/black"
+        app:menu="@menu/bottom_navigation_menu"/>
 
 </android.support.design.widget.CoordinatorLayout>
