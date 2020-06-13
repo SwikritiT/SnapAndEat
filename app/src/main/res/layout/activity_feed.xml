@@ -8,6 +8,14 @@
     android:layout_width="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/feed_toolbar"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+
+        <!--app:theme="@style/custom_toolbar"/>-->
 
     <FrameLayout
         android:id="@+id/container"
