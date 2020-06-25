@@ -157,6 +157,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // TODO : camera part isn't working
         if(requestCode==0 && resultCode==RESULT_OK && data!=null){
             File f = new File(Environment.getExternalStorageDirectory().toString());
 //                for (File temp : f.listFiles()) {

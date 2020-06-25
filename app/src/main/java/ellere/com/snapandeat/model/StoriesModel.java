@@ -8,31 +8,31 @@ package ellere.com.snapandeat.model;
 
 public class StoriesModel {
 
-    private String StoriesName;
-    private int StoriesPic;
+    private String storiesName;
+    private int storiesPic;
 
     public StoriesModel()
     {
 
     }
     public StoriesModel(String storiesName, int storiesPic) {
-        StoriesName = storiesName;
-        StoriesPic = storiesPic;
+        this.storiesName = storiesName;
+        this.storiesPic = storiesPic;
     }
 
     public String getStoriesName() {
-        return StoriesName;
+        return storiesName;
     }
 
     public void setStoriesName(String storiesName) {
-        StoriesName = storiesName;
+        this.storiesName = storiesName;
     }
 
     public int getStoriesPic() {
-        return StoriesPic;
+        return storiesPic;
     }
 
     public void setStoriesPic(int storiesPic) {
-        StoriesPic = storiesPic;
+        this.storiesPic = storiesPic;
     }
 }

@@ -4,4 +4,12 @@
     <string name="add">Add</string>
     <string name="profile">Profile</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="report_pic">Report...</string>
+    <string name="copylink">Copy Link</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="posts">Posts</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Following</string>
+    <string name="editProf">Edit Profile</string>
 </resources>
+

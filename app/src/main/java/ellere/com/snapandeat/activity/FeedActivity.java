@@ -1,4 +1,4 @@
-package ellere.com.snapandeat;
+package ellere.com.snapandeat.activity;
 
 /**
  * Created by swikriti on 3/15/2020.
@@ -18,6 +18,7 @@ package ellere.com.snapandeat;
         import android.view.MenuItem;
         import android.widget.Toolbar;
 
+        import ellere.com.snapandeat.R;
         import ellere.com.snapandeat.fragments.AddFragment;
         import ellere.com.snapandeat.fragments.HomeFragment;
         import ellere.com.snapandeat.fragments.ProfileFragment;
@@ -34,6 +35,7 @@ public class FeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
         toolbar = getSupportActionBar();
         openFragment(new HomeFragment());
+
 
         bottomNavigationView=(BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);

@@ -37,6 +37,7 @@ public class FeedModel {
         PostPic = postPic;
     }
 
+
     public String getName() {
         return Name;
     }

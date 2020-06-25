@@ -6,11 +6,23 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
 
+import ellere.com.snapandeat.Constants;
 import ellere.com.snapandeat.R;
 import ellere.com.snapandeat.adapter.RecyclerViewAdapterFeed;
 import ellere.com.snapandeat.adapter.RecyclerViewAdapterStories;
@@ -21,7 +33,7 @@ import ellere.com.snapandeat.model.StoriesModel;
  * Created by DELL on 4/25/2020.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
     RecyclerView recyclerView1;
     RecyclerView recyclerView2;
 
@@ -31,6 +43,9 @@ public class HomeFragment extends Fragment {
 
     RecyclerViewAdapterFeed adapterFeed;
     RecyclerViewAdapterStories adapterStories;
+    ImageView like,comment,share,bookmark;
+    ImageButton dots;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -63,6 +78,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -74,8 +90,15 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_home,container, false);
+
+        //mview = mInflater.inflate(R.layout.instagram_feed,container, false);
         recyclerView1=view.findViewById(R.id.recy_feed);
         recyclerView2=view.findViewById(R.id.recy_stories);
+//        like=mview.findViewById(R.id.iv_like);
+//        comment=mview.findViewById(R.id.iv_comment);
+//        share=mview.findViewById(R.id.iv_share);
+//        bookmark=mview.findViewById(R.id.iv_bookmark);
+//        dots=mview.findViewById(R.id.btn_dotsfeed);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
         recyclerView1.setLayoutManager(layoutManager);
 
@@ -88,6 +111,44 @@ public class HomeFragment extends Fragment {
 
         recyclerView1.setAdapter(adapterFeed);
         recyclerView2.setAdapter(adapterStories);
+
+//        like.setOnClickListener(this);
+//        comment.setOnClickListener(this);
+//        share.setOnClickListener(this);
+//        bookmark.setOnClickListener(this);
+//        dots.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Creating the instance of PopupMenu
+//                PopupMenu popup = new PopupMenu(getActivity(), dots);
+//                //Inflating the Popup using xml file
+//                popup.getMenuInflater().inflate(R.menu.dots_menu, popup.getMenu());
+//
+//                //registering popup with OnMenuItemClickListener
+//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        switch (item.getItemId()) {
+//                            case R.id.item_report_pic:
+//                                Toast.makeText(getActivity(), "Report selected", Toast.LENGTH_SHORT).show();
+//                                return true;
+//                            case R.id.item_copy_link:
+//                                Toast.makeText(getActivity(), "copy link selected", Toast.LENGTH_SHORT).show();
+//                                return true;
+//                            case R.id.item_unfollow:
+//                                Toast.makeText(getActivity(), "unfollow selected", Toast.LENGTH_SHORT).show();
+//                                return true;
+//                            default:
+//                                return true;
+//                        }
+//
+//
+//                    }
+//                });
+//
+//                popup.show();//showing popup menu
+//
+//            }
+//        });
 
         populaterecyclerview();
 
@@ -112,8 +173,11 @@ public class HomeFragment extends Fragment {
 
     private void populaterecyclerview() {
 
+
+
+
         FeedModel feedModel=new FeedModel("Swikriti ","2 HOURS AGO","Isha","Bbq Chicken Pizza-250 cal",
-                86,R.drawable.propic2,R.drawable.propic6,R.drawable.propic1,R.drawable.postpic1);
+                87,R.drawable.propic2,R.drawable.propic6,R.drawable.propic1,R.drawable.postpic1);
 
         feedModelArrayList.add(feedModel);
 
@@ -143,6 +207,54 @@ public class HomeFragment extends Fragment {
         feedModelArrayList.add(feedModel);
 
     }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//
+//        inflater.inflate(R.menu.dots_menu, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//
+//    }
 
+
+
+
+//    @Override
+//    public void onClick(View v) {
+//        if (v == like) {
+//            like.setImageResource(R.drawable.favourite);
+//            //Toast.makeText(getActivity(), "Comment selected", Toast.LENGTH_SHORT).show();
+//        }
+//        if (v == comment){
+//            Toast.makeText(getActivity(), "Comment selected", Toast.LENGTH_SHORT).show();
+//        }
+//        if (v == share){
+//            Toast.makeText(getActivity(), "Share selected", Toast.LENGTH_SHORT).show();
+//        }
+//        if (v == bookmark){
+//            Toast.makeText(getActivity(), "bookmark selected", Toast.LENGTH_SHORT).show();
+//        }
+//
+//
+//
+//
+//    }
+
+
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()) {
+//            case R.id.item_report_pic:
+//                Toast.makeText(getActivity(), "Report selected", Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.item_copy_link:
+//                Toast.makeText(getActivity(), "copy link selected", Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.item_unfollow:
+//                Toast.makeText(getActivity(), "unfollow selected", Toast.LENGTH_SHORT).show();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 }
