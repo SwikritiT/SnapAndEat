@@ -1,0 +1,168 @@
+package ellere.com.snapandeat.activity;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import ellere.com.snapandeat.Constants;
+import ellere.com.snapandeat.R;
+
+/**
+ * Created by DELL on 6/24/2020.
+ */
+
+public class SignUpActivity extends AppCompatActivity {
+    Button signupbtn;
+    EditText user, pass, confirmpass,fullname_edittext,email_edittext;
+    String username,password,confirmpassword, email,fullname;
+
+    private Pattern pattern;
+    private Matcher matcher;
+    private static final String USERNAME_PATTERN = ".*[&%$#@!~]+.*";
+    SharedPreferences pref;
+    Intent intent;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);signupbtn = (Button) findViewById(R.id.signup_btn);
+        user = (EditText) findViewById(R.id.username_signup);
+        pass = (EditText) findViewById(R.id.password_signup);
+        confirmpass = (EditText) findViewById(R.id.confirmpassword_signup);
+        fullname_edittext=(EditText)findViewById(R.id.fullname);
+        email_edittext=(EditText)findViewById(R.id.email);
+
+        pattern = Pattern.compile(USERNAME_PATTERN);
+        pref = getSharedPreferences("user_details",MODE_PRIVATE);
+        intent = new Intent(SignUpActivity.this,FeedActivity.class);
+        if(pref.contains("username") && pref.contains("password")){
+            startActivity(intent);
+        }
+        signupbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                username = user.getText().toString().trim();
+                password = pass.getText().toString().trim();
+                email=email_edittext.getText().toString().trim();
+                fullname=fullname_edittext.getText().toString().trim();
+
+                confirmpassword = confirmpass.getText().toString().trim();
+                if (username.equals("") || password.equals("") || confirmpassword.equals("") || fullname.equals("")|| email.equals("")) {
+                    Toast.makeText(SignUpActivity.this, "Fill up the field properly", Toast.LENGTH_SHORT).show();
+
+                } else if (password.length() < 8) {
+                    Toast.makeText(SignUpActivity.this, "Password too short...", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (!password.equals(confirmpassword)) {
+                    Toast.makeText(SignUpActivity.this, "Password donot match...", Toast.LENGTH_SHORT).show();
+                }
+
+
+                else if (!validate(username)) {
+                    Toast.makeText(SignUpActivity.this, "special characters not allowed in username...", Toast.LENGTH_SHORT).show();
+                }
+//                 If EditText is not empty and CheckEditText = True then this block will execute.
+                else {
+                    UserRegisterFunction(username,password,fullname,email);
+
+
+                }
+
+            }
+
+        });
+
+
+
+
+    }
+    public void UserRegisterFunction(final String username, final String password,final String fullname, final String email) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SIGNUP,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("flag");
+                            Log.d("response=",success);
+//                            JSONObject myObj=new JSONObject(success);
+                            if (success.equals("1")) {
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("username",username);
+                                editor.putString("password",password);
+                                editor.putString("email",email);
+                                editor.putString("fullname",fullname);
+
+                                editor.apply();
+                                Toast.makeText(SignUpActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, FeedActivity.class);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(SignUpActivity.this, "Register failed" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SignUpActivity.this, "Register Failed" + error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
+                params.put("fullname",fullname);
+                params.put("email",email);
+
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
+    public boolean validate(final String username) {
+        boolean valid = true;
+        matcher = pattern.matcher(username);
+        if (matcher.matches()) {
+            valid = false;
+
+        }
+        return valid;
+    }
+}

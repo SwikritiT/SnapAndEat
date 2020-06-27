@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/lin_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <RelativeLayout
+        android:id="@+id/propic_relay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="65dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/propic2"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@android:color/darker_gray"
+            android:layout_height="65dp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:gravity="center"
+            android:layout_below="@id/profile_pic"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:layout_width="65dp"
+            android:layout_height="18dp"
+          />
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            >
+         <TextView
+             android:id="@+id/noofpost"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="25dp"
+             android:gravity="center"
+             android:textColor="@color/black"
+             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/posts"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+
+                android:layout_below="@+id/noofpost"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            >
+            <TextView
+                android:id="@+id/nooffollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/followers"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_below="@+id/nooffollowers"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            >
+            <TextView
+                android:id="@+id/nooffollowings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/followings"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_below="@+id/nooffollowings"/>
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lin_lay"
+        android:layout_margin="5dp">
+    <Button
+        android:id="@+id/editProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/editProf"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:background="@drawable/editprofile"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
