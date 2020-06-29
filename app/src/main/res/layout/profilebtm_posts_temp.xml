@@ -15,9 +15,8 @@
         <!--app:cardCornerRadius="0dp">-->
     <ImageView
         android:id="@+id/posts_photos"
-        android:layout_width="wrap_content"
-        android:layout_height="140dp"
-
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:clickable="true"
         android:focusable="true"
         />

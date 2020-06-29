@@ -207,13 +207,6 @@ public class HomeFragment extends Fragment{
         feedModelArrayList.add(feedModel);
 
     }
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//
-//        inflater.inflate(R.menu.dots_menu, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//
-//    }
 
 
 

@@ -23,6 +23,8 @@ import ellere.com.snapandeat.activity.FeedActivity;
 import ellere.com.snapandeat.activity.LoginActivity;
 import ellere.com.snapandeat.adapter.ProfileBottomAdapter;
 import ellere.com.snapandeat.adapter.ProfileTopAdapter;
+import ellere.com.snapandeat.adapter.RecyclerViewAdapterFeed;
+import ellere.com.snapandeat.model.FeedModel;
 import ellere.com.snapandeat.model.ProfileBtmModel;
 import ellere.com.snapandeat.model.ProfileTopModel;
 
@@ -32,11 +34,14 @@ import ellere.com.snapandeat.model.ProfileTopModel;
 
 public class ProfileFragment extends Fragment {
     RecyclerView recyclerViewtop, recyclerViewBtm;
+
+
+    ArrayList<FeedModel> btmModelArrayList=new ArrayList<>();
     ArrayList<ProfileTopModel> topModelArrayList=new ArrayList<>();
-    ArrayList<ProfileBtmModel> btmModelArrayList=new ArrayList<>();
+    //ArrayList<ProfileBtmModel> btmModelArrayList=new ArrayList<>();
     ProfileTopAdapter profileTopAdapter;
-    ProfileBottomAdapter profileBottomAdapter;
-    Button editprofile;
+    RecyclerViewAdapterFeed profileBottomAdapter;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,20 +94,19 @@ public class ProfileFragment extends Fragment {
 //        editprofile.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-//                startActivity(intent);
+//
 //
 //            }
 //        });
         //RecyclerView for bottom part of the profile
-        RecyclerView.LayoutManager mlayoutManager=new GridLayoutManager(getActivity(),3);
-        recyclerViewBtm.setLayoutManager(mlayoutManager);
-        recyclerViewBtm.addItemDecoration(new GridSpacingItemDecoration(3, dpToPx(8), true));
-        profileBottomAdapter=new ProfileBottomAdapter(getActivity(),btmModelArrayList);
-        recyclerViewBtm.setAdapter(profileBottomAdapter);
-        //recyclerview for top part of the profile
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        recyclerViewtop.setLayoutManager(layoutManager);
+        recyclerViewBtm.setLayoutManager(layoutManager);
+        profileBottomAdapter=new RecyclerViewAdapterFeed(getActivity(),btmModelArrayList);
+        recyclerViewBtm.setAdapter(profileBottomAdapter);
+
+        //recyclerview for top part of the profile
+        RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
+        recyclerViewtop.setLayoutManager(layoutManager2);
         profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
         recyclerViewtop.setAdapter(profileTopAdapter);
         populateTop();
@@ -115,12 +119,35 @@ public class ProfileFragment extends Fragment {
         topModelArrayList.add(topModel);
     }
     private void populateBottom(){
-        ProfileBtmModel btmModel=new ProfileBtmModel(R.drawable.postpic1);
-        btmModelArrayList.add(btmModel);
-         btmModel=new ProfileBtmModel(R.drawable.postpic2);
-        btmModelArrayList.add(btmModel);
-        btmModel=new ProfileBtmModel(R.drawable.postpic5);
-        btmModelArrayList.add(btmModel);
+        FeedModel feedModel=new FeedModel("Swikriti ","2 HOURS AGO","Isha","Bbq Chicken Pizza-250 cal",
+                87,R.drawable.propic2,R.drawable.propic6,R.drawable.propic1,R.drawable.postpic1);
+
+        btmModelArrayList.add(feedModel);
+
+        feedModel=new FeedModel("Yamuna","25 MINUTES AGO","Swikriti","Cheese Pizza-200 cal",
+                92,R.drawable.propic2,R.drawable.propic5,R.drawable.propic2,R.drawable.postpic2);
+
+        btmModelArrayList.add(feedModel);
+
+        feedModel=new FeedModel("Shardool","50 MINUTES AGO","Yamuna","Mexican Pizza-220 cal",
+                82,R.drawable.propic2,R.drawable.propic4,R.drawable.propic3,R.drawable.postpic3);
+
+        btmModelArrayList.add(feedModel);
+
+        feedModel=new FeedModel("Isha","5 HOURS AGO","Swikriti","Pepperoni Pizza-215 cal",
+                76,R.drawable.propic2,R.drawable.propic3,R.drawable.propic4,R.drawable.postoic4);
+
+        btmModelArrayList.add(feedModel);
+
+        feedModel=new FeedModel("Santosh","36 MINUTES AGO","Isha","Margherita Pizza- 240 cal",
+                97,R.drawable.propic2,R.drawable.propic2,R.drawable.propic5,R.drawable.postpic5);
+
+        btmModelArrayList.add(feedModel);
+
+        feedModel=new FeedModel("Sandhya","8 HOURS AGO","Shardool","Pepperoni Pizza - 215 cal",
+                56,R.drawable.propic2,R.drawable.propic1,R.drawable.propic6,R.drawable.postpic6);
+
+        btmModelArrayList.add(feedModel);
 
     }
 

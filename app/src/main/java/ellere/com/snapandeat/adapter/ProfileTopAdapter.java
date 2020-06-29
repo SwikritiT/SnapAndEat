@@ -1,6 +1,7 @@
 package ellere.com.snapandeat.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ellere.com.snapandeat.R;
+import ellere.com.snapandeat.activity.EditProfileActivity;
 import ellere.com.snapandeat.model.ProfileTopModel;
 
 /**
@@ -22,7 +24,7 @@ import ellere.com.snapandeat.model.ProfileTopModel;
  */
 
 public class ProfileTopAdapter extends RecyclerView.Adapter<ProfileTopAdapter.MyViewHolder> {
-    private Context mContext;
+    static Context mContext;
     private List<ProfileTopModel> profileList;
     public ProfileTopAdapter(Context mContext, List<ProfileTopModel> profileList){
         this.mContext=mContext;
@@ -64,6 +66,15 @@ public class ProfileTopAdapter extends RecyclerView.Adapter<ProfileTopAdapter.My
             noOfFollowings=(TextView)itemView.findViewById(R.id.nooffollowings);
             noOfPosts=(TextView)itemView.findViewById(R.id.noofpost);
             editProfile=(Button)itemView.findViewById(R.id.editProfile);
+            editProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, EditProfileActivity.class);
+                    mContext.startActivity(intent);
+
+
+                }
+            });
         }
     }
 }

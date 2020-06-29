@@ -23,7 +23,7 @@
 
             <EditText
                 android:id="@+id/editTextName"
-                android:hint="Name For Image"
+                android:hint="Size of pizza"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
