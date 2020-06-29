@@ -157,19 +157,22 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // TODO : camera part isn't working
+
         if(requestCode==0 && resultCode==RESULT_OK && data!=null){
-            File f = new File(Environment.getExternalStorageDirectory().toString());
-//                for (File temp : f.listFiles()) {
-//                    if (temp.getName().equals("temp.jpg")) {
-//                        f = temp;
-//                        break;
-//                    }
-//                }
-            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-            bitmapOptions.inSampleSize = 8;
-            Bitmap bitmap1 = BitmapFactory.decodeFile(f.getPath(), bitmapOptions);
-            imageView.setImageBitmap(bitmap1);
+            Bundle bundle = data.getExtras();
+            bitmap = (Bitmap)bundle.get("data");
+            imageView.setImageBitmap(bitmap);
+//            File f = new File(Environment.getExternalStorageDirectory().toString());
+////                for (File temp : f.listFiles()) {
+////                    if (temp.getName().equals("temp.jpg")) {
+////                        f = temp;
+////                        break;
+////                    }
+////                }
+//            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+//            bitmapOptions.inSampleSize = 8;
+//            Bitmap bitmap1 = BitmapFactory.decodeFile(f.getPath(), bitmapOptions);
+//            imageView.setImageBitmap(bitmap1);
             imageView.setVisibility(View.VISIBLE);
             editText.setVisibility(View.VISIBLE);
         }
@@ -221,7 +224,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String,String> map = new HashMap<>();
                 map.put("encoded_string",imageToString(bitmap));
-                map.put("name",editText.getText().toString().trim());
+                map.put("size",editText.getText().toString().trim());
 
 
                 return map;

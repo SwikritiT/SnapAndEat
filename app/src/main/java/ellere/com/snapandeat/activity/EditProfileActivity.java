@@ -99,19 +99,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // TODO : camera part isn't working
+
         if(requestCode==0 && resultCode==RESULT_OK && data!=null){
-            File f = new File(Environment.getExternalStorageDirectory().toString());
-//                for (File temp : f.listFiles()) {
-//                    if (temp.getName().equals("temp.jpg")) {
-//                        f = temp;
-//                        break;
-//                    }
-//                }
-            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-            bitmapOptions.inSampleSize = 8;
-            Bitmap bitmap1 = BitmapFactory.decodeFile(f.getPath(), bitmapOptions);
-            imageView.setImageBitmap(bitmap1);
+            Bundle bundle = data.getExtras();
+            bitmap = (Bitmap)bundle.get("data");
+            imageView.setImageBitmap(bitmap);
+
             imageView.setVisibility(View.VISIBLE);
 
         }
