@@ -156,6 +156,7 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
             else{
                 Constants.LIKE_COUNT=Constants.LIKE_COUNT-1;
                 like.setImageResource(R.drawable.ic_like);
+                isClicked=true;
             }
             //Toast.makeText(getActivity(), "Comment selected", Toast.LENGTH_SHORT).show();
         }
