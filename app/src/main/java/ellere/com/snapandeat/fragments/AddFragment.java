@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,6 +47,7 @@ import ellere.com.snapandeat.Constants;
 import ellere.com.snapandeat.R;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by DELL on 4/24/2020.
@@ -60,6 +62,8 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     private String encoded_string;
     private Bitmap bitmap;
     Uri file_uri;
+    SharedPreferences sharedPreferences;
+    String username;
     private static final int STORAGE_PERMISSION_CODE = 123;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -114,6 +118,10 @@ public class AddFragment extends Fragment implements View.OnClickListener{
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
+        sharedPreferences = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        username=sharedPreferences.getString("username","default value");
+
 
         return view;
     }
@@ -225,6 +233,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                 HashMap<String,String> map = new HashMap<>();
                 map.put("encoded_string",imageToString(bitmap));
                 map.put("size",editText.getText().toString().trim());
+                map.put("username",username);
 
 
                 return map;

@@ -23,6 +23,8 @@ package ellere.com.snapandeat.adapter;
 
         import com.bumptech.glide.Glide;
         import com.bumptech.glide.RequestManager;
+        import com.bumptech.glide.load.engine.DiskCacheStrategy;
+        import com.bumptech.glide.request.RequestOptions;
 
 
         import java.util.List;
@@ -51,10 +53,10 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapterFeed.MyViewHolder holder, final int position) {
-
+        FeedModel feedModel=mData.get(position);
         holder.uploadername.setText(mData.get(position).getName());
         holder.likername.setText(mData.get(position).getLikedBy());
-        holder.posttime.setText(mData.get(position).getTime());
+//        holder.posttime.setText(mData.get(position).getTime());
         holder.likes.setText(mData.get(position).getLikes()+" others");
         holder.captionnames.setText(mData.get(position).getName());
         holder.tags.setText(mData.get(position).getTags());
@@ -62,7 +64,9 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
         glide.load(mData.get(position).getUploaderPic()).into(holder.uploader);
         glide.load(mData.get(position).getProPic()).into(holder.userpic);
         glide.load(mData.get(position).getLikerPic()).into(holder.liker);
-        glide.load(mData.get(position).getPostPic()).into(holder.post);
+//        glide.load(mData.get(position).getPostPic()).into(holder.post);
+
+        glide.load(feedModel.getPostPic()).apply(new RequestOptions().override(300, 300)).into(holder.post);
 
 
     }
@@ -88,7 +92,7 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
 
             uploadername=(TextView) mView.findViewById(R.id.tv_uploader_name);
             likername=(TextView) mView.findViewById(R.id.liker_name);
-            posttime=(TextView) mView.findViewById(R.id.tv_time);
+            //posttime=(TextView) mView.findViewById(R.id.tv_time);
             likes=(TextView) mView.findViewById(R.id.tv_likes);
             captionnames=(TextView) mView.findViewById(R.id.tv_uploader_name_caption);
             tags=(TextView) mView.findViewById(R.id.tv_tags);

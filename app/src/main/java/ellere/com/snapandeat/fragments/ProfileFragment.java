@@ -1,6 +1,7 @@
 package ellere.com.snapandeat.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -9,14 +10,30 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import ellere.com.snapandeat.Constants;
 import ellere.com.snapandeat.R;
 import ellere.com.snapandeat.activity.EditProfileActivity;
 import ellere.com.snapandeat.activity.FeedActivity;
@@ -28,13 +45,15 @@ import ellere.com.snapandeat.model.FeedModel;
 import ellere.com.snapandeat.model.ProfileBtmModel;
 import ellere.com.snapandeat.model.ProfileTopModel;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by DELL on 4/24/2020.
  */
 
 public class ProfileFragment extends Fragment {
-    RecyclerView recyclerViewtop, recyclerViewBtm;
-
+    RecyclerView recyclerViewtop,recyclerViewBtm;
+    SharedPreferences prf;
 
     ArrayList<FeedModel> btmModelArrayList=new ArrayList<>();
     ArrayList<ProfileTopModel> topModelArrayList=new ArrayList<>();
@@ -77,6 +96,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -89,20 +109,9 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerViewtop= view.findViewById(R.id.recy_proftop);
-        recyclerViewBtm=view.findViewById(R.id.recyprof_btm);
-//        editprofile=view.findViewById(R.id.editProfile);
-//        editprofile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-        //RecyclerView for bottom part of the profile
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        recyclerViewBtm.setLayoutManager(layoutManager);
-        profileBottomAdapter=new RecyclerViewAdapterFeed(getActivity(),btmModelArrayList);
-        recyclerViewBtm.setAdapter(profileBottomAdapter);
+
+        prf = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+
 
         //recyclerview for top part of the profile
         RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
@@ -115,43 +124,93 @@ public class ProfileFragment extends Fragment {
     }
 
     private  void  populateTop(){
-        ProfileTopModel topModel=new ProfileTopModel(R.drawable.propic1,"Swikriti","3","0","0");
+        ProfileTopModel topModel=new ProfileTopModel(R.drawable.baseline_account_circle_black_18dp,"Swikriti","3","0","0");
         topModelArrayList.add(topModel);
     }
     private void populateBottom(){
-        FeedModel feedModel=new FeedModel("Swikriti ","2 HOURS AGO","Isha","Bbq Chicken Pizza-250 cal",
-                87,R.drawable.propic2,R.drawable.propic6,R.drawable.propic1,R.drawable.postpic1);
+        StringRequest stringRequest= new StringRequest(Request.Method.GET, Constants.IMAGES_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    final String result = response.toString();
+                    if (result.equals("")) {
+                        Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int i = 0;
+                        Log.d("response", "result1: " + result);
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("response_list");
+                        while (i < jsonArray.length()) {
 
-        btmModelArrayList.add(feedModel);
+                            //getting product object from json array
+                            JSONObject recipes = jsonArray.getJSONObject(i);
 
-        feedModel=new FeedModel("Yamuna","25 MINUTES AGO","Swikriti","Cheese Pizza-200 cal",
-                92,R.drawable.propic2,R.drawable.propic5,R.drawable.propic2,R.drawable.postpic2);
+                            String image_path = recipes.getString("path");
+                            FeedModel feedModel = new FeedModel("Swikriti ", "Muna", "Bbq Chicken Pizza-250 cal",
+                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
 
-        btmModelArrayList.add(feedModel);
+                            btmModelArrayList.add(new FeedModel("Swikriti ", "Muna", "Bbq Chicken Pizza-250 cal",
+                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
+                            i++;
 
-        feedModel=new FeedModel("Shardool","50 MINUTES AGO","Yamuna","Mexican Pizza-220 cal",
-                82,R.drawable.propic2,R.drawable.propic4,R.drawable.propic3,R.drawable.postpic3);
+                        }
+                    }
+                    //RecyclerView for bottom part of the profile
+                      recyclerViewBtm=(RecyclerView)getView().findViewById(R.id.recyprof_btm);
+                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+                    //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerViewBtm.setHasFixedSize(true);
+                    recyclerViewBtm.setLayoutManager(layoutManager);
+                    profileBottomAdapter=new RecyclerViewAdapterFeed(getActivity(),btmModelArrayList);
+                    recyclerViewBtm.setAdapter(profileBottomAdapter);
 
-        btmModelArrayList.add(feedModel);
 
-        feedModel=new FeedModel("Isha","5 HOURS AGO","Swikriti","Pepperoni Pizza-215 cal",
-                76,R.drawable.propic2,R.drawable.propic3,R.drawable.propic4,R.drawable.postoic4);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-        btmModelArrayList.add(feedModel);
 
-        feedModel=new FeedModel("Santosh","36 MINUTES AGO","Isha","Margherita Pizza- 240 cal",
-                97,R.drawable.propic2,R.drawable.propic2,R.drawable.propic5,R.drawable.postpic5);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        volleyError.printStackTrace();
+                        volleyError.getMessage();
 
-        btmModelArrayList.add(feedModel);
+                    }
+                }
+        );
+        Volley.newRequestQueue(getActivity()).add(stringRequest);
 
-        feedModel=new FeedModel("Sandhya","8 HOURS AGO","Shardool","Pepperoni Pizza - 215 cal",
-                56,R.drawable.propic2,R.drawable.propic1,R.drawable.propic6,R.drawable.postpic6);
 
-        btmModelArrayList.add(feedModel);
+
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.logout, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                SharedPreferences.Editor editor = prf.edit();
+                editor.clear();
+                editor.apply();
 
+                Intent intent=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+                break;
+
+
+        }
+        return true;
+
+    }
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private int spanCount;

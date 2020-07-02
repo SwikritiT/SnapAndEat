@@ -47,6 +47,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private Bitmap bitmap;
     Uri file_uri;
     String encoded_string;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

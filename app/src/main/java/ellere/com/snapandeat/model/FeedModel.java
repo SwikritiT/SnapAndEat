@@ -1,5 +1,7 @@
 package ellere.com.snapandeat.model;
 
+import ellere.com.snapandeat.Constants;
+
 /**
  * Created by swikriti on 3/15/2020.
  */
@@ -8,16 +10,15 @@ package ellere.com.snapandeat.model;
 
 public class FeedModel {
 
-    private String Name;
-    private String Time;
-    private String LikedBy;
-    private String Tags;
-
-    private int Likes;
-    private int ProPic;
-    private int LikerPic;
-    private int UploaderPic;
-    private int PostPic;
+    private String name;
+    private String time;
+    private String likedBy;
+    private String tags;
+    private int likes;
+    private int proPic;
+    private int likerPic;
+    private int uploaderPic;
+    private String postPic;
 
 
     public FeedModel()
@@ -25,88 +26,88 @@ public class FeedModel {
 
     }
 
-    public FeedModel(String name, String time, String likedBy, String tags, int likes, int proPic, int likerPic, int uploaderPic, int postPic) {
-        Name = name;
-        Time = time;
-        LikedBy = likedBy;
-        Tags = tags;
-        Likes = likes;
-        ProPic = proPic;
-        LikerPic = likerPic;
-        UploaderPic = uploaderPic;
-        PostPic = postPic;
+    public FeedModel(String name, String likedBy, String tags, int likes, int proPic, int likerPic, int uploaderPic, String postPic) {
+        this.name= name;
+        //this.time= time;
+        this.likedBy = likedBy;
+        this.tags = tags;
+        this.likes = likes;
+        this.proPic= proPic;
+        this.likerPic = likerPic;
+        this.uploaderPic = uploaderPic;
+       this.postPic= postPic;
     }
 
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public String getTime() {
-        return Time;
-    }
-
-    public void setTime(String time) {
-        Time = time;
-    }
+//    public String getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
 
     public String getLikedBy() {
-        return LikedBy;
+        return likedBy;
     }
 
     public void setLikedBy(String likedBy) {
-        LikedBy = likedBy;
+        this.likedBy = likedBy;
     }
 
     public String getTags() {
-        return Tags;
+        return tags;
     }
 
     public void setTags(String tags) {
-        Tags = tags;
+        this.tags = tags;
     }
 
     public int getLikes() {
-        return Likes;
+        return likes;
     }
 
     public void setLikes(int likes) {
-        Likes = likes;
+        this.likes = likes;
     }
 
     public int getProPic() {
-        return ProPic;
+        return proPic;
     }
 
     public void setProPic(int proPic) {
-        ProPic = proPic;
+        this.proPic = proPic;
     }
 
     public int getLikerPic() {
-        return LikerPic;
+        return likerPic;
     }
 
     public void setLikerPic(int likerPic) {
-        LikerPic = likerPic;
+        this.likerPic = likerPic;
     }
 
     public int getUploaderPic() {
-        return UploaderPic;
+        return uploaderPic;
     }
 
     public void setUploaderPic(int uploaderPic) {
-        UploaderPic = uploaderPic;
+        this.uploaderPic = uploaderPic;
     }
 
-    public int getPostPic() {
-        return PostPic;
+    public String getPostPic() {
+        return Constants.BASE_URL+postPic;
     }
 
-    public void setPostPic(int postPic) {
-        PostPic = postPic;
+    public void setPostPic(String postPic) {
+        this.postPic = postPic;
     }
 }
