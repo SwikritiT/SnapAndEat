@@ -191,20 +191,20 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.logout, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+        //inflater.inflate(R.menu.logout, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logout:
-                SharedPreferences.Editor editor = prf.edit();
-                editor.clear();
-                editor.apply();
-
-                Intent intent=new Intent(getActivity(),LoginActivity.class);
-                startActivity(intent);
-                break;
+            //case R.id.logout:
+//                SharedPreferences.Editor editor = prf.edit();
+//                editor.clear();
+//                editor.apply();
+//
+//                Intent intent=new Intent(getActivity(),LoginActivity.class);
+//                startActivity(intent);
+//                break;
 
 
         }

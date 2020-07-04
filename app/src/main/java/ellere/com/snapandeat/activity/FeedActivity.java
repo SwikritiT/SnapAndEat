@@ -7,6 +7,8 @@ package ellere.com.snapandeat.activity;
 
 
 
+        import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.support.annotation.NonNull;
         import android.support.design.widget.BottomNavigationView;
         import android.support.v4.app.Fragment;
@@ -28,6 +30,8 @@ public class FeedActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     private ActionBar toolbar;
+    SharedPreferences prf;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class FeedActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         toolbar.setTitle(Html.fromHtml("<font color='#000000'>SnapAndEat</font>"));
         //toolbar.setTitle("SnapAndEat");
+        //prf = getSharedPreferences("user_details",MODE_PRIVATE);
+        //intent = new Intent(FeedActivity.this,LoginActivity.class);
 
 
     }
