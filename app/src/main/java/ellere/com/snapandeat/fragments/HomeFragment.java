@@ -196,10 +196,10 @@ public class HomeFragment extends Fragment{
                             JSONObject recipes = jsonArray.getJSONObject(i);
 
                             String image_path = recipes.getString("path");
-                            FeedModel feedModel = new FeedModel("Swikriti ",  "Isha", "Bbq Chicken Pizza-250 cal",
+                            FeedModel feedModel = new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
                                     1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
 
-                            feedModelArrayList.add(new FeedModel("Swikriti ",  "Isha", "Bbq Chicken Pizza-250 cal",
+                            feedModelArrayList.add(new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
                                     1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
                             i++;
 
