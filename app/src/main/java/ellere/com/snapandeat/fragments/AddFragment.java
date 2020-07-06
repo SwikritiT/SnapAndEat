@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -67,6 +68,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     Uri file_uri;
     SharedPreferences sharedPreferences;
     String username;
+    String token;
     private static final int STORAGE_PERMISSION_CODE = 123;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -113,20 +115,22 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        PreferenceActivity prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
-//        String user_name= prf.getString("username", "default value");
+
+
         View view= inflater.inflate(R.layout.fragment_add,container, false);
         requestStoragePermission();
         buttonChoose=view.findViewById(R.id.buttonChoose);
         buttonUpload=view.findViewById(R.id.buttonUpload);
+        buttonUpload.setEnabled(false);
         imageView=view.findViewById(R.id.imageView);
         editText=view.findViewById(R.id.editTextName);
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
         username=sharedPreferences.getString("username","default value");
+        token= sharedPreferences.getString("token","default value");
 
 
         return view;
@@ -176,19 +180,10 @@ public class AddFragment extends Fragment implements View.OnClickListener{
             Bundle bundle = data.getExtras();
             bitmap = (Bitmap)bundle.get("data");
             imageView.setImageBitmap(bitmap);
-//            File f = new File(Environment.getExternalStorageDirectory().toString());
-////                for (File temp : f.listFiles()) {
-////                    if (temp.getName().equals("temp.jpg")) {
-////                        f = temp;
-////                        break;
-////                    }
-////                }
-//            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-//            bitmapOptions.inSampleSize = 8;
-//            Bitmap bitmap1 = BitmapFactory.decodeFile(f.getPath(), bitmapOptions);
-//            imageView.setImageBitmap(bitmap1);
+
             imageView.setVisibility(View.VISIBLE);
             editText.setVisibility(View.VISIBLE);
+            buttonUpload.setEnabled(true);
         }
         else if(requestCode==1 && resultCode==RESULT_OK && data!=null){
             file_uri=data.getData();
@@ -197,6 +192,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                 imageView.setImageBitmap(bitmap);
                 imageView.setVisibility(View.VISIBLE);
                 editText.setVisibility(View.VISIBLE);
+                buttonUpload.setEnabled(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -204,6 +200,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
 
     }
     private void uploadImage(){
+        buttonUpload.setEnabled(false);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.UPLOAD_URL,
                 new Response.Listener<String>() {
@@ -220,12 +217,13 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                                 editText.setVisibility(View.GONE);
                                 //PreferenceActivity prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
                                 //user_name= prf.getString("username", "default value");
-
+                                 buttonUpload.setEnabled(true);
 
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(getActivity(), "Failed"+e.toString(), Toast.LENGTH_SHORT).show();
+                            buttonUpload.setEnabled(true);
                         }
 
                     }
@@ -233,6 +231,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), "Failed"+error.toString(), Toast.LENGTH_SHORT).show();
+                buttonUpload.setEnabled(true);
 
             }
         })
@@ -244,6 +243,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                 map.put("encoded_string",imageToString(bitmap));
                 map.put("size",editText.getText().toString().trim());
                 map.put("username",username);
+                map.put("token",token);
 
                 //map.put("username",user_name);
 
