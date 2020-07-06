@@ -98,14 +98,7 @@ public class HomeFragment extends Fragment{
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_home,container, false);
 
-        //mview = mInflater.inflate(R.layout.instagram_feed,container, false);
-       // recyclerView1=view.findViewById(R.id.recy_feed);
         recyclerView2=view.findViewById(R.id.recy_stories);
-//        like=mview.findViewById(R.id.iv_like);
-//        comment=mview.findViewById(R.id.iv_comment);
-//        share=mview.findViewById(R.id.iv_share);
-//        bookmark=mview.findViewById(R.id.iv_bookmark);
-//        dots=mview.findViewById(R.id.btn_dotsfeed);
 
         RecyclerView.LayoutManager layoutManager1=new LinearLayoutManager(getActivity());
         ((LinearLayoutManager) layoutManager1).setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -116,44 +109,6 @@ public class HomeFragment extends Fragment{
 
 
         recyclerView2.setAdapter(adapterStories);
-
-//        like.setOnClickListener(this);
-//        comment.setOnClickListener(this);
-//        share.setOnClickListener(this);
-//        bookmark.setOnClickListener(this);
-//        dots.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Creating the instance of PopupMenu
-//                PopupMenu popup = new PopupMenu(getActivity(), dots);
-//                //Inflating the Popup using xml file
-//                popup.getMenuInflater().inflate(R.menu.dots_menu, popup.getMenu());
-//
-//                //registering popup with OnMenuItemClickListener
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        switch (item.getItemId()) {
-//                            case R.id.item_report_pic:
-//                                Toast.makeText(getActivity(), "Report selected", Toast.LENGTH_SHORT).show();
-//                                return true;
-//                            case R.id.item_copy_link:
-//                                Toast.makeText(getActivity(), "copy link selected", Toast.LENGTH_SHORT).show();
-//                                return true;
-//                            case R.id.item_unfollow:
-//                                Toast.makeText(getActivity(), "unfollow selected", Toast.LENGTH_SHORT).show();
-//                                return true;
-//                            default:
-//                                return true;
-//                        }
-//
-//
-//                    }
-//                });
-//
-//                popup.show();//showing popup menu
-//
-//            }
-//        });
 
         populaterecyclerview();
 
@@ -279,43 +234,5 @@ public class HomeFragment extends Fragment{
 
 
 
-//    @Override
-//    public void onClick(View v) {
-//        if (v == like) {
-//            like.setImageResource(R.drawable.favourite);
-//            //Toast.makeText(getActivity(), "Comment selected", Toast.LENGTH_SHORT).show();
-//        }
-//        if (v == comment){
-//            Toast.makeText(getActivity(), "Comment selected", Toast.LENGTH_SHORT).show();
-//        }
-//        if (v == share){
-//            Toast.makeText(getActivity(), "Share selected", Toast.LENGTH_SHORT).show();
-//        }
-//        if (v == bookmark){
-//            Toast.makeText(getActivity(), "bookmark selected", Toast.LENGTH_SHORT).show();
-//        }
-//
-//
-//
-//
-//    }
-
-
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.item_report_pic:
-//                Toast.makeText(getActivity(), "Report selected", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.item_copy_link:
-//                Toast.makeText(getActivity(), "copy link selected", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.item_unfollow:
-//                Toast.makeText(getActivity(), "unfollow selected", Toast.LENGTH_SHORT).show();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
 
