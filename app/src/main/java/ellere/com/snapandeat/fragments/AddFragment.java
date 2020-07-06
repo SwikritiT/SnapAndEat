@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -54,6 +55,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class AddFragment extends Fragment implements View.OnClickListener{
+
+    private String user_name;
     private Button buttonChoose;
     private Button buttonUpload;
     private ImageView imageView;
@@ -97,6 +100,8 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -108,7 +113,8 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+//        PreferenceActivity prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+//        String user_name= prf.getString("username", "default value");
         View view= inflater.inflate(R.layout.fragment_add,container, false);
         requestStoragePermission();
         buttonChoose=view.findViewById(R.id.buttonChoose);
@@ -212,6 +218,9 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                                 imageView.setVisibility(View.GONE);
                                 editText.setText("");
                                 editText.setVisibility(View.GONE);
+                                //PreferenceActivity prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+                                //user_name= prf.getString("username", "default value");
+
 
                             }
                         } catch (JSONException e) {
@@ -227,6 +236,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
 
             }
         })
+
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -234,6 +244,9 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                 map.put("encoded_string",imageToString(bitmap));
                 map.put("size",editText.getText().toString().trim());
                 map.put("username",username);
+
+                //map.put("username",user_name);
+
 
 
                 return map;
