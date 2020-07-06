@@ -198,7 +198,7 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             //case R.id.logout:
-//                SharedPreferences.Editor editor = prf.edit();
+//                PreferenceActivity.Editor editor = prf.edit();
 //                editor.clear();
 //                editor.apply();
 //

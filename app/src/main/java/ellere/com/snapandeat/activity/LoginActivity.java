@@ -96,14 +96,16 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("flag");
+                            String token = jsonObject.getString("code");
 //                            JSONObject myObj=new JSONObject(success);
                             if (success.equals("1")) {
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("username", username);
                                 editor.putString("password", password);
+                                editor.putString("token",token);
                                 editor.apply();
                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
+                                Log.d("token", "the token is " + token);
 
                                 Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
 
@@ -145,4 +147,17 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+  //  @Override
+//    protected void onStart() {
+//        super.onStart();
+//        SharedPreferences sharedPreferences
+//                = getSharedPreferences("PreferenceActivity",MODE_PRIVATE);
+//        SharedPreferences.Editor editor= sharedPreferences.edit();
+//        editor.putString("name",
+//                name.getText().toString());
+//        editor.putInt("age",
+//                Integer.parseInt(
+//                        age.getText().toString()));
+//        editor.commit();
+//    }
 }

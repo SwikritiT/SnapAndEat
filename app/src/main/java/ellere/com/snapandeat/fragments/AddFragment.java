@@ -113,7 +113,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        SharedPreferences prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+//        PreferenceActivity prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
 //        String user_name= prf.getString("username", "default value");
         View view= inflater.inflate(R.layout.fragment_add,container, false);
         requestStoragePermission();
@@ -218,7 +218,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                                 imageView.setVisibility(View.GONE);
                                 editText.setText("");
                                 editText.setVisibility(View.GONE);
-                                //SharedPreferences prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+                                //PreferenceActivity prf = getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
                                 //user_name= prf.getString("username", "default value");
 
 

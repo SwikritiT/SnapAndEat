@@ -196,6 +196,11 @@ public class HomeFragment extends Fragment{
                             JSONObject recipes = jsonArray.getJSONObject(i);
 
                             String image_path = recipes.getString("path");
+//                            String name=
+//                            likedBy=
+//                             tags=
+//                            likes=
+
                             FeedModel feedModel = new FeedModel("Swikriti ",  "Isha", "Bbq Chicken Pizza-250 cal",
                                     1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
 
