@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -112,6 +113,8 @@ public class ProfileFragment extends Fragment {
 
         prf = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = prf.edit();
+
 
         //recyclerview for top part of the profile
         RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
@@ -191,20 +194,20 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //inflater.inflate(R.menu.logout, menu);
-        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.logout, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            //case R.id.logout:
-//                PreferenceActivity.Editor editor = prf.edit();
-//                editor.clear();
-//                editor.apply();
-//
-//                Intent intent=new Intent(getActivity(),LoginActivity.class);
-//                startActivity(intent);
-//                break;
+            case R.id.logout:
+                SharedPreferences.Editor editor = prf.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent intent=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+                break;
 
 
         }
