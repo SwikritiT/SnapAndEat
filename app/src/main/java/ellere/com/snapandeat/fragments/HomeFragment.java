@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment{
                     } else {
                         int i = 0;
                         Log.d("response", "result1: " + result);
-                        JSONObject jsonObject = new JSONObject(response);
+                       JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = jsonObject.getJSONArray("response_list");
                         while (i < jsonArray.length()) {
 
@@ -151,12 +151,21 @@ public class HomeFragment extends Fragment{
                             JSONObject recipes = jsonArray.getJSONObject(i);
 
                             String image_path = recipes.getString("path");
-                            FeedModel feedModel = new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
-                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
+                            String user_name = recipes.getString("user_name");
+                            Integer likes= recipes.getInt("no_of_likes");
+                            String tags = recipes.getString("size");
 
-                            feedModelArrayList.add(new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
-                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
+
+                            FeedModel feedModel = new FeedModel(user_name,  "Muna", tags, likes , R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
+
+                            feedModelArrayList.add(new FeedModel(user_name,  "Muna", tags, likes , R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
                             i++;
+//                            FeedModel feedModel = new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
+//                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
+//
+//                            feedModelArrayList.add(new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
+//                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
+//                            i++;
 
                         }
                     }

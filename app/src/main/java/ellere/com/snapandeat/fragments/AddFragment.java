@@ -68,7 +68,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     Uri file_uri;
     SharedPreferences sharedPreferences;
     String username;
-    String token;
+    //String token;
     private static final int STORAGE_PERMISSION_CODE = 123;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -130,7 +130,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         sharedPreferences = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
         username=sharedPreferences.getString("username","default value");
-        token= sharedPreferences.getString("token","default value");
+        //token= sharedPreferences.getString("token","default value");
 
 
         return view;
@@ -243,7 +243,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
                 map.put("encoded_string",imageToString(bitmap));
                 map.put("size",editText.getText().toString().trim());
                 map.put("username",username);
-                map.put("token",token);
+               // map.put("token",token);
 
                 //map.put("username",user_name);
 

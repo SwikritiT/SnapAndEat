@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,6 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import ellere.com.snapandeat.Constants;
 import ellere.com.snapandeat.R;
@@ -61,6 +64,8 @@ public class ProfileFragment extends Fragment {
     //ArrayList<ProfileBtmModel> btmModelArrayList=new ArrayList<>();
     ProfileTopAdapter profileTopAdapter;
     RecyclerViewAdapterFeed profileBottomAdapter;
+    String username;
+    SharedPreferences sharedPreferences;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -111,9 +116,10 @@ public class ProfileFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerViewtop= view.findViewById(R.id.recy_proftop);
 
-        prf = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+        sharedPreferences = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
+        username=sharedPreferences.getString("username","default value");
 
-        SharedPreferences.Editor editor = prf.edit();
+
 
 
         //recyclerview for top part of the profile
@@ -127,11 +133,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private  void  populateTop(){
-        ProfileTopModel topModel=new ProfileTopModel(R.drawable.baseline_account_circle_black_18dp,"Swikriti","3","0","0");
-        topModelArrayList.add(topModel);
-    }
-    private void populateBottom(){
-        StringRequest stringRequest= new StringRequest(Request.Method.GET, Constants.IMAGES_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.PROFILEINFO_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -140,20 +142,89 @@ public class ProfileFragment extends Fragment {
                         Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
                     } else {
                         int i = 0;
-                        Log.d("response", "result1: " + result);
+                        Log.d("response", "result3: " + result);
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = jsonObject.getJSONArray("response_list");
                         while (i < jsonArray.length()) {
 
                             //getting product object from json array
                             JSONObject recipes = jsonArray.getJSONObject(i);
+                            String user_name = recipes.getString("user_name");
+                           String posts= recipes.getString("no_of_posts");
+                            String followers= recipes.getString("no_of_followers");
+                            String following= recipes.getString("no_of_following");
 
+
+                            ProfileTopModel topModel=new ProfileTopModel(R.drawable.baseline_account_circle_black_18dp,user_name,posts,followers,following);
+                            topModelArrayList.add(new ProfileTopModel(R.drawable.baseline_account_circle_black_18dp,user_name,posts,followers,following));
+
+                        }
+                    }
+                    //recyclerview for top part of the profile
+//                    recyclerViewtop= (RecyclerView)getView().findViewById(R.id.recy_proftop);
+//                    RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
+//                    recyclerViewtop.setHasFixedSize(true);
+//                    recyclerViewtop.setLayoutManager(layoutManager2);
+//                    profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
+//                    recyclerViewtop.setAdapter(profileTopAdapter);
+
+
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        volleyError.printStackTrace();
+                        volleyError.getMessage();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                //Log.d("a", "checkUsername: " + username);
+
+                return params;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(stringRequest);
+
+
+
+
+    }
+    private void populateBottom(){
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, Constants.PROFILE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    final String result = response.toString();
+                    if (result.equals("")) {
+                        Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int i = 0;
+                        Log.d("response", "result2: " + result);
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("response_list");
+                        while (i < jsonArray.length()) {
+
+                            //getting product object from json array
+                            JSONObject recipes = jsonArray.getJSONObject(i);
+                            String user_name = recipes.getString("user_name");
+                            Integer likes= recipes.getInt("no_of_likes");
+                            String tags = recipes.getString("size");
                             String image_path = recipes.getString("path");
-                            FeedModel feedModel = new FeedModel("Swikriti ", "Muna", "Bbq Chicken Pizza-250 cal",
-                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
+                            FeedModel feedModel = new FeedModel(user_name, "Muna", tags,
+                                    likes, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
 
-                            btmModelArrayList.add(new FeedModel("Swikriti ", "Muna", "Bbq Chicken Pizza-250 cal",
-                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
+                            btmModelArrayList.add(new FeedModel(user_name, "Muna", tags,likes, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
                             i++;
 
                         }
@@ -183,8 +254,18 @@ public class ProfileFragment extends Fragment {
                         volleyError.getMessage();
 
                     }
-                }
-        );
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                //Log.d("a", "checkUsername: " + username);
+
+                return params;
+            }
+        };
         Volley.newRequestQueue(getActivity()).add(stringRequest);
 
 
