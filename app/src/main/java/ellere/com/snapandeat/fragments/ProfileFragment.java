@@ -1,5 +1,6 @@
 package ellere.com.snapandeat.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -114,7 +115,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
-        recyclerViewtop= view.findViewById(R.id.recy_proftop);
+        //recyclerViewtop= view.findViewById(R.id.recy_proftop);
 
         sharedPreferences = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
         username=sharedPreferences.getString("username","default value");
@@ -123,10 +124,10 @@ public class ProfileFragment extends Fragment {
 
 
         //recyclerview for top part of the profile
-        RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
-        recyclerViewtop.setLayoutManager(layoutManager2);
-        profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
-        recyclerViewtop.setAdapter(profileTopAdapter);
+//        RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
+//        recyclerViewtop.setLayoutManager(layoutManager2);
+//        profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
+//        recyclerViewtop.setAdapter(profileTopAdapter);
         populateTop();
         populateBottom();
         return view;
@@ -137,36 +138,36 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    final String result = response.toString();
-                    if (result.equals("")) {
+                    final String result3 = response.toString();
+                    if (result3.equals("")) {
                         Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
                     } else {
                         int i = 0;
-                        Log.d("response", "result3: " + result);
+                        Log.d("response", "result3: " + result3);
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = jsonObject.getJSONArray("response_list");
-                        while (i < jsonArray.length()) {
+
 
                             //getting product object from json array
-                            JSONObject recipes = jsonArray.getJSONObject(i);
-                            String user_name = recipes.getString("user_name");
-                           String posts= recipes.getString("no_of_posts");
-                            String followers= recipes.getString("no_of_followers");
-                            String following= recipes.getString("no_of_following");
+                            JSONObject recipe = jsonArray.getJSONObject(i);
+                            String user_name = recipe.getString("user_name");
+                           String posts= recipe.getString("no_of_posts");
+                            String followers= recipe.getString("no_of_followers");
+                            String following= recipe.getString("no_of_following");
 
 
                             ProfileTopModel topModel=new ProfileTopModel(R.drawable.baseline_account_circle_black_18dp,user_name,posts,followers,following);
                             topModelArrayList.add(new ProfileTopModel(R.drawable.baseline_account_circle_black_18dp,user_name,posts,followers,following));
 
-                        }
+
                     }
                     //recyclerview for top part of the profile
-//                    recyclerViewtop= (RecyclerView)getView().findViewById(R.id.recy_proftop);
-//                    RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
-//                    recyclerViewtop.setHasFixedSize(true);
-//                    recyclerViewtop.setLayoutManager(layoutManager2);
-//                    profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
-//                    recyclerViewtop.setAdapter(profileTopAdapter);
+                   recyclerViewtop= (RecyclerView)getView().findViewById(R.id.recy_proftop);
+                    RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
+                    recyclerViewtop.setHasFixedSize(true);
+                    recyclerViewtop.setLayoutManager(layoutManager2);
+                    profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
+                    recyclerViewtop.setAdapter(profileTopAdapter);
 
 
 
@@ -282,9 +283,17 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                SharedPreferences.Editor editor = prf.edit();
-                editor.clear();
-                editor.commit();
+                SharedPreferences pref = getActivity().getSharedPreferences("user_details", Context.MODE_PRIVATE);
+                pref.edit().clear().commit();
+
+//                SharedPreferences.Editor editor = prf.edit();
+//                editor.remove("username");
+//                editor.remove("password");
+//                editor.remove("token");
+//
+//
+//                editor.clear();
+//                editor.commit();
 
                 Intent intent=new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
