@@ -1,12 +1,15 @@
 package ellere.com.snapandeat.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -283,8 +286,27 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                SharedPreferences pref = getActivity().getSharedPreferences("user_details", Context.MODE_PRIVATE);
-                pref.edit().clear().commit();
+                final CharSequence[] options={"Yes","No"};
+                AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+                builder.setTitle("Are you sure you want to logout?");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        if(options[item].equals("Yes")){
+                            SharedPreferences pref = getActivity().getSharedPreferences("user_details", Context.MODE_PRIVATE);
+                            pref.edit().clear().commit();
+                            Intent intent=new Intent(getActivity(),LoginActivity.class);
+                            startActivity(intent);
+
+                        }
+                        else if (options[item].equals("No")) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                builder.show();
+
+
 
 //                SharedPreferences.Editor editor = prf.edit();
 //                editor.remove("username");
@@ -295,8 +317,7 @@ public class ProfileFragment extends Fragment {
 //                editor.clear();
 //                editor.commit();
 
-                Intent intent=new Intent(getActivity(),LoginActivity.class);
-                startActivity(intent);
+
                 break;
 
 
