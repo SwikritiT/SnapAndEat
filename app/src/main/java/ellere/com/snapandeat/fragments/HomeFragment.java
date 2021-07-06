@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment{
 
 
     RecyclerViewAdapterStories adapterStories;
-    ImageView like,comment,share,bookmark;
+    ImageView like;
     ImageButton dots;
 
     // TODO: Rename parameter arguments, choose names that match
