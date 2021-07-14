@@ -118,19 +118,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
-        //recyclerViewtop= view.findViewById(R.id.recy_proftop);
-
         sharedPreferences = this.getActivity().getSharedPreferences("user_details", MODE_PRIVATE);
         username=sharedPreferences.getString("username","default value");
-
-
-
-
-        //recyclerview for top part of the profile
-//        RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getActivity());
-//        recyclerViewtop.setLayoutManager(layoutManager2);
-//        profileTopAdapter=new ProfileTopAdapter(getActivity(),topModelArrayList);
-//        recyclerViewtop.setAdapter(profileTopAdapter);
         populateTop();
         populateBottom();
         return view;
@@ -304,19 +293,6 @@ public class ProfileFragment extends Fragment {
                     }
                 });
                 builder.show();
-
-
-
-//                SharedPreferences.Editor editor = prf.edit();
-//                editor.remove("username");
-//                editor.remove("password");
-//                editor.remove("token");
-//
-//
-//                editor.clear();
-//                editor.commit();
-
-
                 break;
 
 

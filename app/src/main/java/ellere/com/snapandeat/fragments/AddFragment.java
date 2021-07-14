@@ -8,11 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -27,9 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.content.SharedPreferences;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -45,7 +40,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,16 +67,7 @@ public class AddFragment extends Fragment implements View.OnClickListener, Adapt
     Uri file_uri;
     SharedPreferences sharedPreferences;
     String username;
-    //String token;
     private static final int STORAGE_PERMISSION_CODE = 123;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
 
     public AddFragment() {
         // Required empty public constructor
@@ -107,13 +92,6 @@ public class AddFragment extends Fragment implements View.OnClickListener, Adapt
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
     }
 
     @Override
@@ -162,15 +140,15 @@ public class AddFragment extends Fragment implements View.OnClickListener, Adapt
         switch (position) {
             case 0:
                 sizeOfPizza = String.valueOf(adapterView.getItemAtPosition(position));
-                Log.d(TAG, "size: " +sizeOfPizza);
+                Log.d(TAG, "size: " + sizeOfPizza);
                 break;
             case 1:
                 sizeOfPizza = String.valueOf(adapterView.getItemAtPosition(position));
-                Log.d(TAG, "size: " +sizeOfPizza);
+                Log.d(TAG, "size: " + sizeOfPizza);
                 break;
             case 2:
                 sizeOfPizza = String.valueOf(adapterView.getItemAtPosition(position));
-                Log.d(TAG, "size: " +sizeOfPizza);
+                Log.d(TAG, "size: " + sizeOfPizza);
                 break;
 
         }
