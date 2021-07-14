@@ -11,9 +11,9 @@ import ellere.com.snapandeat.Constants;
 public class FeedModel {
 
     private String name;
-    private String time;
     private String likedBy;
-    private String tags;
+    private String pizzaPrediction;
+    private String calorie;
     private int likes;
     private int proPic;
     private int likerPic;
@@ -26,16 +26,16 @@ public class FeedModel {
 
     }
 
-    public FeedModel(String name, String likedBy, String tags, int likes, int proPic, int likerPic, int uploaderPic, String postPic) {
+    public FeedModel(String name, String likedBy, String pizzaPrediction, int likes, int proPic, int likerPic, int uploaderPic, String postPic,String calorie) {
         this.name= name;
-        //this.time= time;
         this.likedBy = likedBy;
-        this.tags = tags;
+        this.pizzaPrediction = pizzaPrediction;
         this.likes = likes;
         this.proPic= proPic;
         this.likerPic = likerPic;
         this.uploaderPic = uploaderPic;
        this.postPic= postPic;
+       this.calorie= calorie;
     }
 
 
@@ -47,13 +47,13 @@ public class FeedModel {
         this.name = name;
     }
 
-//    public String getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(String time) {
-//        this.time = time;
-//    }
+    public String getCalorie() {
+        return calorie;
+    }
+
+    public void setTime(String calorie) {
+        this.calorie = calorie;
+    }
 
     public String getLikedBy() {
         return likedBy;
@@ -63,12 +63,12 @@ public class FeedModel {
         this.likedBy = likedBy;
     }
 
-    public String getTags() {
-        return tags;
+    public String getPizzaPrediction() {
+        return pizzaPrediction;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void setPizzaPrediction(String pizzaPrediction) {
+        this.pizzaPrediction = pizzaPrediction;
     }
 
     public int getLikes() {

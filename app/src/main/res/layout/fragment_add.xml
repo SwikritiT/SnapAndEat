@@ -21,12 +21,19 @@
                 android:layout_height="wrap_content"
                 android:text="Select" />
 
-            <EditText
-                android:id="@+id/editTextName"
-                android:hint="Size of pizza"
+<!--            <EditText-->
+<!--                android:id="@+id/editTextName"-->
+<!--                android:hint="Size of pizza"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+            <Spinner
+                android:id="@+id/dropDownSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dialog" />
 
             <Button
                 android:id="@+id/buttonUpload"

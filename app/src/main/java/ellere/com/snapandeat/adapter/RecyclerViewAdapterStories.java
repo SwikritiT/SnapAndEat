@@ -26,8 +26,8 @@ package ellere.com.snapandeat.adapter;
 
 public class RecyclerViewAdapterStories  extends RecyclerView.Adapter<RecyclerViewAdapterStories.MyViewHolder> {
 
-    private Context context;
-    private List<StoriesModel> mData;
+    private final Context context;
+    private final List<StoriesModel> mData;
     RequestManager glide;
 
     public RecyclerViewAdapterStories(Context context, List<StoriesModel> mData) {

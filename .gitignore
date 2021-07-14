@@ -7,3 +7,5 @@
 /build
 /captures
 .externalNativeBuild
+app/build.gradle
+app/src/main/java/ellere/com/snapandeat/Constants.java
