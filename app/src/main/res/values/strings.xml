@@ -11,5 +11,11 @@
     <string name="followers">Followers</string>
     <string name="followings">Following</string>
     <string name="editProf">Edit Profile</string>
+
+    <string-array name="pizza_sizes">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
 </resources>
 

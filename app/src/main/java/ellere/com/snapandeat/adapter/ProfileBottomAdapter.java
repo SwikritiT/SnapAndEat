@@ -21,8 +21,8 @@ import ellere.com.snapandeat.model.ProfileTopModel;
  */
 
 public class ProfileBottomAdapter extends RecyclerView.Adapter<ProfileBottomAdapter.MyViewHolder> {
-    private Context mContext;
-    private List<ProfileBtmModel> profileList;
+    private final Context mContext;
+    private final List<ProfileBtmModel> profileList;
 
     public ProfileBottomAdapter(Context mContext, List<ProfileBtmModel> profileList){
         this.mContext=mContext;

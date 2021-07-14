@@ -20,10 +20,8 @@ package ellere.com.snapandeat.adapter;
         import ellere.com.snapandeat.Constants;
         import ellere.com.snapandeat.R;
         import ellere.com.snapandeat.model.FeedModel;
-
         import com.bumptech.glide.Glide;
         import com.bumptech.glide.RequestManager;
-        import com.bumptech.glide.load.engine.DiskCacheStrategy;
         import com.bumptech.glide.request.RequestOptions;
 
 
@@ -34,12 +32,12 @@ package ellere.com.snapandeat.adapter;
 public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAdapterFeed.MyViewHolder> {
 
     static Context context;
-    private List<FeedModel> mData;
+    private final List<FeedModel> mData;
     RequestManager glide;
 
 
     public RecyclerViewAdapterFeed(Context context, List<FeedModel> mData) {
-        this.context = context;
+        RecyclerViewAdapterFeed.context = context;
         this.mData = mData;
         this.glide = Glide.with(context);
     }
@@ -56,15 +54,14 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
         FeedModel feedModel=mData.get(position);
         holder.uploadername.setText(mData.get(position).getName());
         holder.likername.setText(mData.get(position).getLikedBy());
-//        holder.posttime.setText(mData.get(position).getTime());
         holder.likes.setText(mData.get(position).getLikes()+" others");
-        holder.captionnames.setText(mData.get(position).getName());
-        holder.tags.setText(mData.get(position).getTags());
-
+        holder.pizzaEstimateTextView.setText(" Predicted pizza: ");
+        holder.calorie.setText(mData.get(position).getCalorie());
+        holder.pizzaPrediction.setText(mData.get(position).getPizzaPrediction());
+        holder.caloriePerSlice.setText("Calorie per slice: ");
         glide.load(mData.get(position).getUploaderPic()).into(holder.uploader);
         glide.load(mData.get(position).getProPic()).into(holder.userpic);
         glide.load(mData.get(position).getLikerPic()).into(holder.liker);
-//        glide.load(mData.get(position).getPostPic()).into(holder.post);
 
         glide.load(feedModel.getPostPic()).apply(new RequestOptions().override(300, 300)).into(holder.post);
 
@@ -79,7 +76,7 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
-        TextView uploadername,likername,posttime,likes,captionnames,tags;
+        TextView uploadername,likername,likes, pizzaEstimateTextView,pizzaPrediction,calorie,caloriePerSlice;
         CircleImageView uploader,userpic,liker;
         ImageView post;
         ImageView like,comment,share,bookmark;
@@ -92,11 +89,11 @@ public class RecyclerViewAdapterFeed extends RecyclerView.Adapter<RecyclerViewAd
 
             uploadername=(TextView) mView.findViewById(R.id.tv_uploader_name);
             likername=(TextView) mView.findViewById(R.id.liker_name);
-            //posttime=(TextView) mView.findViewById(R.id.tv_time);
             likes=(TextView) mView.findViewById(R.id.tv_likes);
-            captionnames=(TextView) mView.findViewById(R.id.tv_uploader_name_caption);
-            tags=(TextView) mView.findViewById(R.id.tv_tags);
-
+            pizzaEstimateTextView=(TextView) mView.findViewById(R.id.pizza_estimate_textfield);
+            pizzaPrediction=(TextView) mView.findViewById(R.id.pizza_prediction);
+            calorie=(TextView) mView.findViewById(R.id.calorie);
+            caloriePerSlice=(TextView) mView.findViewById(R.id.caloriePerSlice);
             uploader=(CircleImageView) mView.findViewById(R.id.uploader_pro_pic);
             userpic=(CircleImageView) mView.findViewById(R.id.user_pro_pic);
             liker=(CircleImageView) mView.findViewById(R.id.liker_pro_pic);
