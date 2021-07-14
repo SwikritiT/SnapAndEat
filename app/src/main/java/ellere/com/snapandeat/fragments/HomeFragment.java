@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onResponse(String response) {
                 try {
-                    final String result = response.toString();
+                    final String result = response;
                     if (result.equals("")) {
                         Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
                     } else {
@@ -148,17 +148,15 @@ public class HomeFragment extends Fragment{
                         while (i < jsonArray.length()) {
 
                             //getting product object from json array
-                            JSONObject recipes = jsonArray.getJSONObject(i);
+                            JSONObject responseObj = jsonArray.getJSONObject(i);
 
-                            String image_path = recipes.getString("path");
-                            String user_name = recipes.getString("user_name");
-                            Integer likes= recipes.getInt("no_of_likes");
-                            String tags = recipes.getString("size");
+                            String image_path = responseObj.getString("path");
+                            String user_name = responseObj.getString("user_name");
+                            Integer likes=  responseObj.getInt("no_of_likes");
+                            String pizza_prediction= responseObj.getString("pizza_prediction");
+                            String caloriePerSlice = responseObj.getString("calorie");
 
-
-                            FeedModel feedModel = new FeedModel(user_name,  "Muna", tags, likes , R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
-
-                            feedModelArrayList.add(new FeedModel(user_name,  "Muna", tags, likes , R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
+                            feedModelArrayList.add(new FeedModel(user_name,  "Muna", pizza_prediction, likes , R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path,caloriePerSlice));
                             i++;
 //                            FeedModel feedModel = new FeedModel("Swikriti ",  "Muna", "Bbq Chicken Pizza-250 cal",
 //                                    1, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);

@@ -141,7 +141,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    final String result3 = response.toString();
+                    final String result3 = response;
                     if (result3.equals("")) {
                         Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
                     } else {
@@ -209,7 +209,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    final String result = response.toString();
+                    final String result = response;
                     if (result.equals("")) {
                         Toast.makeText(getActivity(), "No Picture Found", Toast.LENGTH_SHORT).show();
                     } else {
@@ -220,15 +220,14 @@ public class ProfileFragment extends Fragment {
                         while (i < jsonArray.length()) {
 
                             //getting product object from json array
-                            JSONObject recipes = jsonArray.getJSONObject(i);
-                            String user_name = recipes.getString("user_name");
-                            Integer likes= recipes.getInt("no_of_likes");
-                            String tags = recipes.getString("size");
-                            String image_path = recipes.getString("path");
-                            FeedModel feedModel = new FeedModel(user_name, "Muna", tags,
-                                    likes, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path);
-
-                            btmModelArrayList.add(new FeedModel(user_name, "Muna", tags,likes, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path));
+                            JSONObject responseObj = jsonArray.getJSONObject(i);
+                            String user_name = responseObj.getString("user_name");
+                            Integer likes= responseObj.getInt("no_of_likes");
+                            String tags = responseObj.getString("size");
+                            String image_path = responseObj.getString("path");
+                            String pizza_prediction= responseObj.getString("pizza_prediction");
+                            String caloriePerSlice = responseObj.getString("calorie");
+                            btmModelArrayList.add(new FeedModel(user_name, "Muna", pizza_prediction,likes, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, R.drawable.baseline_account_circle_black_18dp, image_path,caloriePerSlice));
                             i++;
 
                         }
@@ -327,9 +326,9 @@ public class ProfileFragment extends Fragment {
     }
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
+        private final int spanCount;
+        private final int spacing;
+        private final boolean includeEdge;
 
         public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
             this.spanCount = spanCount;
