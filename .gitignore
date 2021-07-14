@@ -1,11 +1,10 @@
 *.iml
 .gradle
+/.idea
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
 /build
 /captures
 .externalNativeBuild
-app/build.gradle
-app/src/main/java/ellere/com/snapandeat/Constants.java
+/app/build.gradle
+/app/src/main/java/ellere/com/snapandeat/Constants.java
